@@ -1,0 +1,47 @@
+{
+  "name": "diagram-chatgpt-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Create Diagrams with Kroki, using Mermaid, GraphViz, Excalidraw, and more",
+  "author": "InfoHazard Economist",
+  "repository": "bra1ndump/show-me-chatgpt-plugin",
+  "license": "AGPL-3.0",
+  "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "dev": "miniflare --build-watch-path src --build-command \"npm run build\" --wrangler-config wrangler.local.toml --kv SHORTEN --kv-persist --modules build/index.js",
+    "dev:with-secrets": "miniflare --build-watch-path src --build-command \"npm run build\" --wrangler-config wrangler.toml --kv SHORTEN --kv-persist --modules build/index.js",
+    "_comment": "NOTE: Only use wrangler when deploying or testing in the cloud. Use miniflare for local development (npm run dev).",
+    "dev:wrangler": "wrangler dev --env=local",
+    "publish": "wrangler publish",
+    "build": "npx esbuild --loader:.html=text --bundle --target=esnext --format=esm --sourcemap --outdir=build src/index.ts"
+  },
+  "dependencies": {
+    "@cloudflare/itty-router-openapi": "^0.0.15",
+    "@cloudflare/workers-types": "^4.20230404.0",
+    "chatgpt-plugin": "^0.1.2",
+    "itty-cors": "^0.3.6",
+    "nanoid": "^4.0.2",
+    "pako": "^2.1.0",
+    "zod": "^3.21.4"
+  },
+  "keywords": [
+    "openai",
+    "chatgpt",
+    "plugin",
+    "openapi",
+    "cloudflare",
+    "diagram",
+    "mindmap",
+    "state chart",
+    "flow chart",
+    "timeline"
+  ],
+  "devDependencies": {
+    "typescript": "^5.0.4",
+    "miniflare": "^2.10.0",
+    "esbuild": "^0.17.19"
+  }
+}
